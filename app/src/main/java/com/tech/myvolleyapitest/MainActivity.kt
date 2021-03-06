@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         progressBar.visibility = View.VISIBLE
 // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
+       // val queue = Volley.newRequestQueue(this)
+
         val url = "https://meme-api.herokuapp.com/gimme/wholesomememes"
 
 // Request a string response from the provided URL.
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET, url, null,
             Response.Listener { response ->
                 var url = response.getString("url")
+
                 Glide.with(this).load(url).listener(
                     object : RequestListener<Drawable> {
                         override fun onLoadFailed(
@@ -77,7 +79,9 @@ class MainActivity : AppCompatActivity() {
             })
 
 // Add the request to the RequestQueue.
-        queue.add(jsonObjectRequest)
+     //   queue.add(jsonObjectRequest)
+        //using singleton
+        MySinglton.getInstance(this).addToRequestQueue(jsonObjectRequest)
 
 
     }
